@@ -7,24 +7,29 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/header.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/home-page.css" asp-append-version="true" />
-@*    <link rel="stylesheet" href="~/GymClient.styles.css" asp-append-version="true" />*@
+    <link rel="stylesheet" href="~/css/couhes_style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/classes_styel.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/register_style.css" asp-append-version="true" />
 </head>
 <body>
+    <div class="wrapper">
     <header>
         <div class="logo-container">
-            <h1>IronWorks Gym</h1>
+            <h2>IronWorks Gym</h2>
         </div>
 
         <div class="links-container">
             <ul>
-                <li><a href="/html/couhes.html">OUR TRAINERS</a></li>
-                <li>CLASSES</li>
+                <li><a asp-action="Index" asp-controller="Coach" >OUR TRAINERS</a></li>
+                    <li><a asp-action="Index" asp-controller="Classes">CLASSES</a></li>
+
                 <li>INFO</li>
                 <li>
+                        <a asp-action="Index" asp-controller="Register">
                     <div class="member-button">
                         <p for="">BECOME A MEMBER</p>
                     </div>
-
+                        </a>
                 </li>
             </ul>
         </div>
@@ -53,6 +58,8 @@
 
         </div>
     </footer>
+
+    </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
