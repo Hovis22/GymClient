@@ -1,0 +1,125 @@
+.register-container{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background: url(/images/register_back.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    position: relative;
+    
+}
+
+.register-text{
+    width: 32%;
+   position: absolute;
+   left: 18%;
+   top: 15%;
+}
+
+.blue-top{
+    color: #0CAFBA;
+    font-size: 20px;
+    line-height: 19px;
+    padding-bottom: 20px;
+}
+
+
+.register-text h1{
+    font-size: 50px;
+line-height: 48px;
+font-weight: 300;
+ padding-bottom: 15px;
+}
+
+
+.register-text .under-text{
+    font-weight: 300;
+font-size: 20px;
+line-height: 29px;
+}
+
+
+
+
+.register-block{
+    background-color: white;
+    color: black;
+    position: absolute;
+    left: 60%;
+    top: 15%;
+    height: 55%;
+    width: 35vw;
+    padding: 40px;
+}
+
+
+.register-block h2{
+    border-bottom: 1px solid rgba(129, 127, 127, 0.5);
+    padding-bottom: 10px;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  padding-top: 15px;
+}
+
+label{
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 19px;
+    padding-bottom: 0px;  
+}
+
+.label-radio{
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 14px;
+}
+
+
+
+input[type="text"],input[type="date"]{
+    width: 100%;
+    height: 30px; 
+    font-size: 15px;     
+}
+
+
+.under-name{
+font-weight: 300;
+font-size: 15px;
+line-height: 14px;
+padding-top: 5px;
+color: rgba(148, 141, 141, 0.6);
+}
+
+
+.input-block{
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 28px;
+}
+
+
+
+.row-block{
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+}
+
+
+input[type="submit"]{
+    color: white;
+    font-size: 15px;
+    width: 130px;
+height: 36px;
+background: #2365E4;
+border: 2px solid #2365E4;
+border-radius: 20px;
+ margin-top: 30px;
+}

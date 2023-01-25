@@ -1,0 +1,115 @@
+@import url('http://fonts.cdnfonts.com/css/gotham');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gotham', sans-serif;
+}
+
+
+.wrapper{
+    display: flex;
+    flex-direction:column;
+    width:100%;
+}
+
+
+
+header{
+    display: flex;
+    width: 100%;
+ 
+}
+
+.logo-container{
+
+    padding: 25.5px ;
+    margin:0 0 0 50px;
+    border-width: 0px 1px;
+    border-style: solid;
+    border-color: rgba(107, 107, 107, 0.2);
+    
+}
+
+
+
+.links-container{
+    left: 55%;
+    position: absolute;
+}
+
+
+.links-container ul{
+    padding: 25px ;
+    display: flex;
+    list-style-type: none;
+    flex-wrap: wrap;
+    justify-content: space-between;
+                   
+
+}
+
+li{
+  margin: 10px 20px;
+  font-weight: 500;
+}
+
+
+.member-button{
+    margin-top: -15px;
+    padding: 10px;
+    border-radius: 50px ;
+    background-color:#2365E4;
+   color: white;
+   font-weight: 500;
+   height: 50px;
+}
+
+.member-button p{
+    padding: 5px;
+    
+}
+
+
+footer{
+
+    
+    width: 100%;
+    background-color: black;
+    height: 141px;
+}
+
+
+.footer-container{
+    width: 100%;
+    height: inherit;
+    padding:45px 25.5px ;
+display: flex;
+
+}
+
+.footer-logo-container{
+    display: flex;
+    width: 50%;
+    margin:0 0 0 50px;
+    color: white;
+    
+}
+
+.footer-logo-container p{
+    padding: 15px;
+    margin-left: 50px;
+
+}
+
+.icons-container{
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    margin-left: 100px;
+}
+
+.icons-container a{
+    margin-left: 23px;
+}
