@@ -1,19 +1,18 @@
-.register-container{
+.register-container {
     display: flex;
     width: 100%;
-    height: 100vh;
+    height: 770px;
     background: url(/images/register_back.png);
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
     position: relative;
-    
 }
 
 .register-text{
     width: 32%;
    position: absolute;
-   left: 18%;
+   left: 13%;
    top: 15%;
 }
 
@@ -42,13 +41,13 @@ line-height: 29px;
 
 
 
-.register-block{
+.register-block {
     background-color: white;
     color: black;
     position: absolute;
     left: 60%;
     top: 15%;
-    height: 55%;
+    height: 70%;
     width: 35vw;
     padding: 40px;
 }

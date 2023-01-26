@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model GymClient.Models.RegisterModel
 @{
 }
 
@@ -17,19 +15,20 @@
 
     <div class="register-block">
         <h2>Your Information</h2>
-        <form action="">
+        @using (Html.BeginForm("GoNew", "Register", FormMethod.Post))
+        {
             <label style="padding-bottom:5px;" for="Name">Name</label>
             <div class="row-block">
 
                 <div class="input-block">
 
-                    <input type="text">
+                    <input asp-for="Name" type="text">
                     <label class="under-name" for="First">First</label>
                 </div>
 
 
                 <div class="input-block">
-                    <input type="text">
+                    <input asp-for="LastName" type="text" >
                     <label class="under-name" for="Last">Last</label>
                 </div>
 
@@ -38,19 +37,20 @@
 
             <div class="row-block">
                 <div class="input-block">
-                    <label style="padding-bottom:5px;" for="Date">Date</label>
-                    <input type="date">
+                    <label  style="padding-bottom:5px;" for="BirthDay">BirthDay</label>
+                    <input asp-for="BirthDay" type="date" >
                 </div>
 
 
                 <div class="input-block">
                     <label style="padding-bottom:10px;" for="Gender">Gender</label>
                     <div class="row-block">
+                        <input asp-for="Sex" id="hiddenGen" type="text" hidden>
 
-                        <input value="Men" type="radio"><label class="label-radio" for="">Men</label>
+                        <input class="radiobut" value="Men" type="radio"><label class="label-radio" for="">Men</label>
 
-                        <input value="Women" type="radio"><label class="label-radio" for="">Women</label>
-                        <input value="Other" type="radio"><label class="label-radio" for="">Other</label>
+                        <input class="radiobut" value="Women" type="radio"><label class="label-radio" for="">Women</label>
+                        <input class="radiobut" value="Other" type="radio"><label class="label-radio" for="">Other</label>
                     </div>
 
                 </div>
@@ -60,15 +60,15 @@
 
 
                 <div class="input-block">
-                    <label style="padding-bottom:5px;" for="Email">Email</label>
-                    <input type="text">
+                    <label  style="padding-bottom:5px;" for="Email">Email</label>
+                    <input asp-for="Email" type="text">
 
                 </div>
 
 
                 <div class="input-block">
                     <label style="padding-bottom:5px;" for="Password">Password</label>
-                    <input type="text">
+                    <input asp-for="Password" type="text">
 
                 </div>
 
@@ -78,20 +78,58 @@
 
 
 
-            <label style="padding-bottom:5px;" for="Email">Phone</label>
+            <label  style="padding-bottom:5px;" for="Phone"> Phone</label>
 
 
-            <input type="text">
+                <input asp-for="Phone" type="text">
 
 
             <input value="Submit" type="submit">
 
 
-        </form>
+     }
 
+     @*<form asp-action="GoNew" method="post">
+        <input type="text"/>
+        <input type="submit" />
+     </form>*@
 
 
 
     </div>
 
 </div>
+
+
+
+
+
+<script>
+    let hiddenGender = document.getElementById("hiddenGen");
+    let radio = document.querySelectorAll("input[type=radio]");
+
+
+
+
+
+    radio.forEach(element => {
+        element.addEventListener('click', (event) => {
+            clearRadio();
+            element.checked = true;
+
+
+            hiddenGender.value = element.value;
+        })
+    })
+
+
+
+    function clearRadio() {
+        radio.forEach(element => {
+            element.checked = false;
+        });
+    }
+
+
+
+</script>
