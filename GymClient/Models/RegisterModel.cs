@@ -8,25 +8,37 @@ namespace GymClient.Models
 
         public int Id { get; set; }
 
+        [Required]
+        [StringLength(100)]
+        public string Name { get; set; }
+        [Required]
+        [StringLength(100)]
+        public string LastName { get; set; }
 
-        public string? Name { get; set; }
+        [Required]
+        public DateTime BirthDay { get; set; }
 
-        public string? LastName { get; set; }
-
-   
-        public DateTime? BirthDay { get; set; }
-
-    
-        public string? Phone { get; set; }
-
-
-        public string? Email { get; set; }
+        [Required]
+        [Phone]
+        [StringLength(100)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
+        public string Phone { get; set; }
 
 
-        public string? Sex { get; set; }
+        [Required]
+        [StringLength(100)]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        public string Email { get; set; }
 
 
-        public string? Password { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string Gender { get; set; }
+
+
+        [Required]
+        [StringLength(100,MinimumLength = 8)]
+        public string Password { get; set; }
 
     }
 }

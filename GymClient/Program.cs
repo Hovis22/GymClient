@@ -2,6 +2,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+
 
 builder.Services.AddHttpClient(name: "Gym",
            options =>
@@ -27,6 +29,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseAuthentication();
+
 
 app.MapControllerRoute(
     name: "default",

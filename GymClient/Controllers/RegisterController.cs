@@ -5,6 +5,12 @@ using System.Text.Json;
 using System.Text;
 using GymClient.Models;
 using System;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
+using System.Text.Json.Serialization;
+using System.Net.Http.Json;
+using Newtonsoft.Json;
 
 namespace GymClient.Controllers
 {
@@ -25,6 +31,8 @@ namespace GymClient.Controllers
 
         public IActionResult Index()
         {
+           // ViewBag.IsEmail = isEmail;
+
             return View();
         }
 
@@ -43,16 +51,18 @@ namespace GymClient.Controllers
 
         [HttpPost]
         public async Task<IActionResult> GoNew(RegisterModel reg) {
-            Console.WriteLine(reg.BirthDay);
-
-            SendRegisterModel(reg);
-
-            return Redirect("/Register");
+         
+           if(await SendRegisterModel(reg) == false)
+            {
+                return Index();
+            }
+           
+            return Redirect("/");
         }
 
 
 
-        public async void SendRegisterModel(RegisterModel registerModel)
+        public async Task<bool> SendRegisterModel(RegisterModel registerModel)
         {
             string url = "register";
 
@@ -61,36 +71,58 @@ namespace GymClient.Controllers
             name: "Gym");
 
             var registermodelJson = new StringContent(
-                JsonSerializer.Serialize(registerModel),
+                System.Text.Json.JsonSerializer.Serialize(registerModel),
                 Encoding.UTF8,
                 Application.Json);
 
             using (var httpResponseMessage =
-                await client.PostAsync(url, registermodelJson))  
+                 await client.PostAsync(url, registermodelJson))
             {
 
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
-                 
+                    string jsonString = await httpResponseMessage.Content.ReadAsStringAsync();
+                    registerModel = JsonConvert.DeserializeObject<RegisterModel>(jsonString);
 
-                    ViewData["Rezult"] = "Ok";
-              //      await Authenticate(st);
+
+                    Authenticate(registerModel);
+
+                    return true;
 
                 }
-                else ViewData["Rezult"] = $"Incorrect Data";
-              //  return Page();
+              
 
             }
 
-
-
-
-
-
+            return false;
         }
 
 
 
+
+
+
+        private async Task Authenticate(RegisterModel model)
+        {
+         
+       
+            var claims = new List<Claim>
+            {
+
+                new Claim(ClaimsIdentity.DefaultNameClaimType, model.Name),
+            
+                new Claim(ClaimTypes.NameIdentifier, model.Id.ToString()),
+             
+            };
+            // создаем объект ClaimsIdentity
+            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+
+
+            // установка аутентификационных куки
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+
+
+        }
 
 
 

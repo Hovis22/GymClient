@@ -1,5 +1,6 @@
 ﻿@model GymClient.Models.RegisterModel
 @{
+ //   string textIs =Convert.ToString(ViewBag.IsEmail);
 }
 
 <div class="register-container">
@@ -15,20 +16,24 @@
 
     <div class="register-block">
         <h2>Your Information</h2>
+
         @using (Html.BeginForm("GoNew", "Register", FormMethod.Post))
         {
+         
             <label style="padding-bottom:5px;" for="Name">Name</label>
             <div class="row-block">
 
                 <div class="input-block">
-
+                   
                     <input asp-for="Name" type="text">
-                    <label class="under-name" for="First">First</label>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <label asp-validation-for="Name" class="under-name" for="First">First</label>
                 </div>
 
 
                 <div class="input-block">
                     <input asp-for="LastName" type="text" >
+                    <span asp-validation-for="LastName" class="text-danger"></span>
                     <label class="under-name" for="Last">Last</label>
                 </div>
 
@@ -39,19 +44,23 @@
                 <div class="input-block">
                     <label  style="padding-bottom:5px;" for="BirthDay">BirthDay</label>
                     <input asp-for="BirthDay" type="date" >
+                    <span asp-validation-for="BirthDay" class="text-danger"></span>
+               
                 </div>
 
 
                 <div class="input-block">
                     <label style="padding-bottom:10px;" for="Gender">Gender</label>
                     <div class="row-block">
-                        <input asp-for="Sex" id="hiddenGen" type="text" hidden>
-
+                        <input  asp-for="Gender" id="hiddenGen" type="text" hidden >
+                      
                         <input class="radiobut" value="Men" type="radio"><label class="label-radio" for="">Men</label>
 
-                        <input class="radiobut" value="Women" type="radio"><label class="label-radio" for="">Women</label>
+                        <input  class="radiobut" value="Women" type="radio"><label class="label-radio" for="">Women</label>
                         <input class="radiobut" value="Other" type="radio"><label class="label-radio" for="">Other</label>
+
                     </div>
+                 
 
                 </div>
             </div>
@@ -62,14 +71,14 @@
                 <div class="input-block">
                     <label  style="padding-bottom:5px;" for="Email">Email</label>
                     <input asp-for="Email" type="text">
-
+                    <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
 
 
                 <div class="input-block">
                     <label style="padding-bottom:5px;" for="Password">Password</label>
                     <input asp-for="Password" type="text">
-
+                    <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
 
 
@@ -82,6 +91,7 @@
 
 
                 <input asp-for="Phone" type="text">
+            <span asp-validation-for="Phone" class="text-danger"></span>
 
 
             <input value="Submit" type="submit">
@@ -89,10 +99,7 @@
 
      }
 
-     @*<form asp-action="GoNew" method="post">
-        <input type="text"/>
-        <input type="submit" />
-     </form>*@
+   
 
 
 
@@ -108,7 +115,7 @@
     let hiddenGender = document.getElementById("hiddenGen");
     let radio = document.querySelectorAll("input[type=radio]");
 
-
+    
 
 
 
