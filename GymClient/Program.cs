@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,14 +7,24 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/login";
+        options.LoginPath = "/Register";
+        options.AccessDeniedPath = "/login";
+    });
+
+builder.Services.AddHttpContextAccessor();
+
+
+builder.Services.AddAuthorization();
+
+
 builder.Services.AddHttpClient(name: "Gym",
            options =>
            {
                options.BaseAddress = new Uri("http://localhost:5033/");
-               //options.DefaultRequestHeaders.Accept.Add(
-               //new MediaTypeWithQualityHeaderValue(
-               //"application/json", 1.0));
-               //options.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
            });
 
 

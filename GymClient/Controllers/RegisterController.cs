@@ -18,13 +18,12 @@ namespace GymClient.Controllers
     
     public class RegisterController : Controller
     {
-
         IHttpClientFactory clientFactory;
 
         public RegisterController(IHttpClientFactory httpClientFactory)
         {
             clientFactory = httpClientFactory;
-
+       
         }
 
 
@@ -85,7 +84,7 @@ namespace GymClient.Controllers
                     registerModel = JsonConvert.DeserializeObject<RegisterModel>(jsonString);
 
 
-                    Authenticate(registerModel);
+                  await Authenticate(registerModel);
 
                     return true;
 
@@ -104,22 +103,19 @@ namespace GymClient.Controllers
 
         private async Task Authenticate(RegisterModel model)
         {
-         
-       
+
+
             var claims = new List<Claim>
-            {
-
-                new Claim(ClaimsIdentity.DefaultNameClaimType, model.Name),
-            
-                new Claim(ClaimTypes.NameIdentifier, model.Id.ToString()),
-             
-            };
-            // создаем объект ClaimsIdentity
-            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+    {
+        new Claim(ClaimTypes.Name, model.Email),
+        new Claim(ClaimTypes.Locality, model.Name),
+        new Claim(ClaimTypes.NameIdentifier, model.Id.ToString())
+    };
+            var claimsIdentity = new ClaimsIdentity(claims, "Cookies");
+            var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
 
-            // установка аутентификационных куки
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+            await HttpContext.SignInAsync(claimsPrincipal);
 
 
         }
