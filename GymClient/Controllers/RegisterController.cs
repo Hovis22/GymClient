@@ -38,16 +38,6 @@ namespace GymClient.Controllers
 
 
 
-        //    [HttpPost]
-        //    public async Task<IActionResult> OnPostAsync([Bind("Id,Name,LastName,BirthDay,Phone,Email,Sex,Password")] RegisterModel reg)
-        //{
-        //    Console.WriteLine(123);
-        //    return Redirect("/");
-        //}
-
-
-
-
         [HttpPost]
         public async Task<IActionResult> GoNew(RegisterModel reg) {
          
@@ -63,7 +53,7 @@ namespace GymClient.Controllers
 
         public async Task<bool> SendRegisterModel(RegisterModel registerModel)
         {
-            string url = "register";
+            string url = "auth/register";
 
 
             var client = clientFactory.CreateClient(
@@ -81,10 +71,10 @@ namespace GymClient.Controllers
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     string jsonString = await httpResponseMessage.Content.ReadAsStringAsync();
-                    registerModel = JsonConvert.DeserializeObject<RegisterModel>(jsonString);
+                    var user = JsonConvert.DeserializeObject<Client>(jsonString);
 
 
-                  await Authenticate(registerModel);
+                  await Authenticate(user);
 
                     return true;
 
@@ -101,7 +91,7 @@ namespace GymClient.Controllers
 
 
 
-        private async Task Authenticate(RegisterModel model)
+        private async Task Authenticate(Client model)
         {
 
 

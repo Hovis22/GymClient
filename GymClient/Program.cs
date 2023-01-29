@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,14 +12,18 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     .AddCookie(options =>
     {
         options.LoginPath = "/login";
-        options.LoginPath = "/Register";
         options.AccessDeniedPath = "/login";
     });
 
 builder.Services.AddHttpContextAccessor();
 
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(opts => {
+
+    opts.AddPolicy("Clients", policy => {
+        policy.RequireClaim(ClaimTypes.Name);
+    });
+});
 
 
 builder.Services.AddHttpClient(name: "Gym",
@@ -40,9 +45,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
 app.UseAuthentication();
 
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
