@@ -1,6 +1,8 @@
 ﻿using GymClient.Models;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace GymClient.Controllers
 {
@@ -15,6 +17,7 @@ namespace GymClient.Controllers
 
         public IActionResult Index()
         {
+           
             return View();
         }
 

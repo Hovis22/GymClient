@@ -20,8 +20,8 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddAuthorization(opts => {
 
-    opts.AddPolicy("Clients", policy => {
-        policy.RequireClaim(ClaimTypes.Name);
+    opts.AddPolicy("OnlyForAdmins", policy => {
+        policy.RequireClaim(ClaimsIdentity.DefaultRoleClaimType,"2");
     });
 });
 

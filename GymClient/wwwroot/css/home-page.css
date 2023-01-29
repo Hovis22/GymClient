@@ -5,15 +5,15 @@
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
+   
 }
 
 .middle-block{
     justify-content: center;
     align-items: center;
-    position: absolute;
+    padding-top:10%;
     
-    left: 35%;
-   top:30%;
+
 }
 
 .text-container{

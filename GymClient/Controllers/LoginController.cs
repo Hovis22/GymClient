@@ -45,7 +45,7 @@ namespace GymClient.Controllers
 
 
 
-        public async Task<bool> SendLoginModel(LoginModel registerModel)
+        public async Task<bool> SendLoginModel(LoginModel loginModel)
         {
             string url = "auth/login";
 
@@ -54,7 +54,7 @@ namespace GymClient.Controllers
             name: "Gym");
 
             var registermodelJson = new StringContent(
-                System.Text.Json.JsonSerializer.Serialize(registerModel),
+                System.Text.Json.JsonSerializer.Serialize(loginModel),
                 Encoding.UTF8,
                 Application.Json);
 
@@ -65,7 +65,7 @@ namespace GymClient.Controllers
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     string jsonString = await httpResponseMessage.Content.ReadAsStringAsync();
-                    var user  = JsonConvert.DeserializeObject<Client>(jsonString);
+                    var user  = JsonConvert.DeserializeObject<Personal>(jsonString);
 
 
                     await Authenticate(user);
@@ -86,16 +86,21 @@ namespace GymClient.Controllers
 
 
 
-        private async Task Authenticate(Client model)
+        private async Task Authenticate(Personal model)
         {
-
+          
 
             var claims = new List<Claim>
     {
         new Claim(ClaimTypes.Name, model.Email),
         new Claim(ClaimTypes.Locality, model.Name),
-        new Claim(ClaimTypes.NameIdentifier, model.Id.ToString())
+        new Claim(ClaimTypes.NameIdentifier, model.Id.ToString()),
+           new Claim(ClaimsIdentity.DefaultRoleClaimType, model.RoleId.ToString())
     };
+
+
+            
+
             var claimsIdentity = new ClaimsIdentity(claims, "Cookies");
             var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
