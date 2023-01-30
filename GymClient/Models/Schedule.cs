@@ -9,6 +9,8 @@ namespace GymClient.Models
 		public string Name { get; set; }
 		[Required]
 		public DateTime DateOfTrain { get; set; }
+		[Required]
+		public int TimeOfTrain { get; set; }
 
 		[Required]
 		public int CoachId { get; set; }
@@ -19,5 +21,7 @@ namespace GymClient.Models
 		public int MaxPeople { get; set; }
 
 		public int CountPeople { get; set; } = 0;
+
+		public Personal? personal { get; set; }
 	}
 }

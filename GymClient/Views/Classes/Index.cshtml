@@ -1,7 +1,25 @@
-﻿@*
+﻿@model GymClient.Models.Schedule;
+@using System.Globalization
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    DateTime oneDay = new DateTime();
+
+
+    bool SameDay(DateTime date){
+        Console.WriteLine(oneDay.Date);
+        Console.WriteLine(date.Date);
+        if(oneDay.Date != date.Date){
+            oneDay = date;          
+            return false;
+        }
+        return true;
+
+    }
+
+
+
 }
 
 
@@ -18,7 +36,52 @@
 
     <h1>Classes</h1>
 
-    <div class="combo-box">
+    @foreach(Schedule day in ViewBag.Schedule){
+
+
+        
+
+        <div class="combo-box">
+
+
+    
+            @if (SameDay(day.DateOfTrain) == false)
+            {
+
+                <div class="combo-header">
+                    <div class="header-container">
+                
+                    <h2>@day.DateOfTrain.ToString("ddd d MMM",CultureInfo.CreateSpecificCulture("en-US"))</h2>
+                    <img src="/images/up.png" alt="">
+                </div>
+
+            </div>
+
+            }
+
+            <div class="combo-item">
+
+                <h3 >@day.Name</h3>
+                <p>@day.DateOfTrain.ToString("hh:mm tt",CultureInfo.CreateSpecificCulture("en-US")) /@day.TimeOfTrain min</p>
+                <p>@day.personal.Name</p>
+
+               
+                    <a class="go-button" href="">Go</a>
+               
+
+            </div>
+
+       
+
+        </div>
+
+
+
+
+
+    }
+
+@*    <div class="combo-box">
         <div class="combo-header">
             <div class="header-container">
                 <h2>Tuesday Jan 17</h2>
@@ -62,7 +125,7 @@
 
 
     </div>
-
+*@
 
 
 </div>

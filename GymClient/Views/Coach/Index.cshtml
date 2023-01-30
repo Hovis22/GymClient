@@ -21,8 +21,24 @@
     <div class="coaches-block">
 
         <h1>Coaches</h1>
+   
+
         <div class="coahes-container">
-            <div class="coach">
+
+            @foreach (var coach in ViewBag.Coaches)
+            {
+                <div class="coach">
+                    <img src="@coach.IMGPath" alt="">
+                </div>
+            }
+
+
+
+
+
+
+
+          @*  <div class="coach">
                 <img src="/images/couch.png" alt="">
             </div>
             <div class="coach">
@@ -39,7 +55,7 @@
 
             <div class="coach">
                 <img src="/images/couch.png" alt="">
-            </div>
+            </div>*@
 
         </div>
 

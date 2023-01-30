@@ -11,7 +11,7 @@ namespace GymClient.Controllers
     public class AdminController : Controller
     {
 
-		IHttpClientFactory clientFactory = null;
+		IHttpClientFactory clientFactory;
 		IWebHostEnvironment _appEnvironment;
 
 		public AdminController(IHttpClientFactory clientFactory, IWebHostEnvironment appEnvironment)
@@ -78,20 +78,20 @@ namespace GymClient.Controllers
 		[HttpPost]
 		public async Task<IActionResult> AddNewScheldue(Schedule reg)
 		{
-			Console.WriteLine(reg.CoachId);
-	
+			Console.WriteLine(reg.TypeId);
 
-			//if (await SendPersonalModel(reg) == false)
-			//{
-			//	return RedirectToAction("AddCoach");
-			//};
+
+			if (await SendScheduleModel(reg) == false)
+			{
+				return RedirectToAction("AddScheldue");
+			};
 
 
 
 			return Redirect("/");
 		}
 
-		public async Task<bool> SendPersonalModel(Schedule schedule)
+		public async Task<bool> SendScheduleModel(Schedule schedule)
 		{
 			string url = "admin/addschedule";
 
@@ -121,12 +121,6 @@ namespace GymClient.Controllers
 
 			return false;
 		}
-
-
-
-
-
-
 
 
 
@@ -170,7 +164,7 @@ namespace GymClient.Controllers
 		public async Task<List<Personal>?> OnGetCoachesAsync()
 		{
 
-			string uri = "admin/getformcoach";
+			string uri = "admin/getcoach";
 
 			var client = clientFactory.CreateClient(
 			name: "Gym");

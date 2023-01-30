@@ -67,16 +67,17 @@
 
 .coahes-container {
     display: grid;
-    gap: 1rem;
+    gap: 0rem;
     grid-template-columns: repeat(auto-fit,minmax(31.8vw,1fr));
 }
 
 .coach{
     margin: 10px;
-     /* width: calc(100vw - (100vw * 0.146rem));  */
     width: 31.8vw;
+    height:500px;
 }
 
 .coach img{
+    height:inherit;
     width: inherit;
 }
