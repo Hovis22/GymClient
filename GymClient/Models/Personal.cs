@@ -1,4 +1,7 @@
-﻿namespace GymClient.Models
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace GymClient.Models
 {
     public class Personal
     {
@@ -21,5 +24,10 @@
         public string IMGPath { get; set; }
 
         public string Password { get; set; }
-    }
+
+
+	
+
+
+	}
 }

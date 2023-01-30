@@ -24,11 +24,11 @@
 						<div class="card-body p-5">
 							<h1 class="fs-4 card-title fw-bold mb-4">Login</h1>
 							<p style="color:darkred">@ViewBag.Error</p>
-							@using (Html.BeginForm("Add", "Admin", FormMethod.Post))
-							{
+							<form asp-action="AddNewPersonal" asp-controller="Admin" enctype="multipart/form-data">
+							
 								<div class="mb-3">
 									<label class="mb-2 text-muted" for="email">E-Mail Address</label>
-									<input asp-for="Email" id="email" type="email" class="form-control" value="" required autofocus>
+									<input asp-for="Email" id="email" type="email" class="form-control" value=""  >
 									<span asp-validation-for="Email" class="text-danger"></span>
 								</div>
 
@@ -37,7 +37,7 @@
 										<label class="text-muted" for="password">Password</label>
 
 									</div>
-									<input id="password" asp-for="Password" type="password" class="form-control" required>
+									<input id="password" asp-for="Password" type="password" class="form-control" >
 									<span asp-validation-for="Password" class="text-danger"></span>
 
 								</div>
@@ -47,7 +47,7 @@
 										<label class="text-muted" for="Name">Name</label>
 
 									</div>
-									<input id="Name" asp-for="Name" type="text" class="form-control" required>
+									<input id="Name" asp-for="Name" type="text" class="form-control" >
 									<span asp-validation-for="Name" class="text-danger"></span>
 
 								</div>
@@ -58,7 +58,7 @@
 										<label class="text-muted" for="LastName">LastName</label>
 
 									</div>
-									<input id="LastName" asp-for="LastName" type="text" class="form-control" required>
+									<input id="LastName" asp-for="LastName" type="text" class="form-control" >
 									<span asp-validation-for="LastName" class="text-danger"></span>
 
 								</div>
@@ -68,7 +68,7 @@
 										<label class="text-muted" for="BirthDay">BirthDay</label>
 
 									</div>
-									<input id="BirthDay" asp-for="BirthDay" type="date" class="form-control" required>
+									<input id="BirthDay" asp-for="BirthDay" type="date" class="form-control" >
 									<span asp-validation-for="BirthDay" class="text-danger"></span>
 
 								</div>
@@ -79,7 +79,7 @@
 										<label class="text-muted" for="Phone">Phone</label>
 
 									</div>
-									<input id="Phone" asp-for="Phone" type="text" class="form-control" required>
+									<input id="Phone" asp-for="Phone" type="text" class="form-control" >
 									<span asp-validation-for="Phone" class="text-danger"></span>
 
 								</div>
@@ -100,13 +100,30 @@
 								</div>
 
 
+
+								<div class="mb-3">
+									<div class="mb-2 w-100">
+										<label class="text-muted" for="Role">Role</label>
+
+									</div>
+									<select asp-for="RoleId">
+										<option value="1">Man</option>
+										<option value="2">Woman</option>
+										<option value="3">Other</option>
+									</select>
+									<span asp-validation-for="RoleId" class="text-danger"></span>
+
+								</div>
+
+
+
 								<div class="mb-3">
 									<div class="mb-2 w-100">
 										<label class="text-muted" for="IMGPath">IMG</label>
 
 									</div>
-									<input asp-for="IMGPath" type="file">
-									<span asp-validation-for="IMGPath" class="text-danger"></span>
+									<input name="uploadImage" type="file" required>
+							
 
 								</div>
 
@@ -117,8 +134,8 @@
 
 
 
-
-							}
+							</form>
+							
 						</div>
 						
 					</div>

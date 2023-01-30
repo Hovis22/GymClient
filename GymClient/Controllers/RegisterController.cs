@@ -28,7 +28,7 @@ namespace GymClient.Controllers
 
 
 
-        public IActionResult Index()
+        public IActionResult Index(string? error="")
         {
            // ViewBag.IsEmail = isEmail;
 
@@ -43,8 +43,8 @@ namespace GymClient.Controllers
          
            if(await SendRegisterModel(reg) == false)
             {
-                return Index();
-            }
+                return RedirectToAction("Index", "Register", new { error = "Email or Password Incorrect" });
+			}
            
             return Redirect("/");
         }
