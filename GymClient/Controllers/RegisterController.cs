@@ -73,9 +73,7 @@ namespace GymClient.Controllers
                     string jsonString = await httpResponseMessage.Content.ReadAsStringAsync();
                     var user = JsonConvert.DeserializeObject<Personal>(jsonString);
 
-
                   await Authenticate(user);
-
                     return true;
 
                 }

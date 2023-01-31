@@ -42,6 +42,15 @@ namespace GymClient.Controllers
 
 
 
+		public IActionResult LogOut()
+		{
+
+
+			Response.Cookies.Delete(".AspNetCore.Cookies");
+
+		  return	 Redirect("/");
+		}
+
 
 		public async Task<List<Schedule>?> SendUserId(int id,string url)
 		{

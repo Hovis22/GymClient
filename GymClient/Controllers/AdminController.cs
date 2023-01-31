@@ -31,8 +31,10 @@ namespace GymClient.Controllers
             return View();
         }
 
-		public IActionResult Coach()
+		public async Task<IActionResult> Coach()
 		{
+			ViewBag.Sch =await SendCoachId(Convert.ToInt32(User.FindFirst(x => x.Type == ClaimTypes.NameIdentifier).Value));
+
 			return View();
 		}
 
@@ -204,6 +206,43 @@ namespace GymClient.Controllers
 				string jsonString = await response.Content.ReadAsStringAsync();
 				return JsonConvert.DeserializeObject<IEnumerable<Client>>(jsonString).ToList<Client>();
 			}
+			return null;
+		}
+
+
+
+		public async Task<List<Schedule>?> SendCoachId(int id)
+		{
+			UserId userId = new UserId();
+			Console.Write(id);
+			string url = "admin/getcoachschedule";
+
+			userId.Id = id;
+
+
+			var client = clientFactory.CreateClient(
+			name: "Gym");
+
+			var registermodelJson = new StringContent(
+				System.Text.Json.JsonSerializer.Serialize(userId),
+				Encoding.UTF8,
+				Application.Json);
+
+			using (var httpResponseMessage =
+				 await client.PostAsync(url, registermodelJson))
+			{
+
+				if (httpResponseMessage.IsSuccessStatusCode)
+				{
+
+					string jsonString = await httpResponseMessage.Content.ReadAsStringAsync();
+					return JsonConvert.DeserializeObject<IEnumerable<Schedule>>(jsonString).ToList<Schedule>();
+
+				}
+
+
+			}
+
 			return null;
 		}
 

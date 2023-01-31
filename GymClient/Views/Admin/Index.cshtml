@@ -2,10 +2,25 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+   
+    void DeleteCookies(){
+
+        
+    }
+
 }
-<div style="height:100vh;" >
+<div style="min-height:100vh;" >
+    <h1>Hi @User.Identity.Name</h1>
+
 
     <a asp-controller="Admin" asp-action="AddCoach">AddCoach</a><br>
-    <a asp-controller="Admin" asp-action="AddScheldue">AddScheldue</a>
+    <a  asp-controller="Admin" asp-action="AddScheldue">AddScheldue</a><br>
 
+
+    
+
+
+
+
+    <a asp-controller="User" asp-action="LogOut">LogOut</a>
 </div>

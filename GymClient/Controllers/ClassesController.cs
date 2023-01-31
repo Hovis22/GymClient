@@ -32,13 +32,16 @@ namespace GymClient.Controllers
 
 		public async Task<IActionResult> UserToTrain(int id)
 		{
-			int? userId = Convert.ToInt32(User.FindFirst(x => x.Type == ClaimTypes.NameIdentifier).Value);
-
-			if(userId == null)
-			{
+	      if(User.FindFirst(x => x.Type == ClaimTypes.NameIdentifier) == (null))
+	 		{
 				return RedirectToAction("Index", "Login");
 			}
 
+
+
+			int? userId = Convert.ToInt32(User.FindFirst(x => x.Type == ClaimTypes.NameIdentifier).Value);
+
+		
 	
 
 
@@ -50,7 +53,7 @@ namespace GymClient.Controllers
 			}
 
 
-			return View();
+			return RedirectToAction("Index", "User");
 		}
 
 

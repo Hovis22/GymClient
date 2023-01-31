@@ -13,6 +13,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     {
         options.LoginPath = "/login";
         options.AccessDeniedPath = "/login";
+        options.LogoutPath = "/logout";
     });
 
 builder.Services.AddHttpContextAccessor();

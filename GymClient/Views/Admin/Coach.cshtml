@@ -1,10 +1,74 @@
-﻿@*
+﻿@using System.Globalization
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-}
-<div style="height:100vh;">
+    DateTime oneDay = new DateTime();
 
-    <a asp-controller="Admin" asp-action="AddScheldue">AddScheldue</a>
+    bool SameDay(DateTime date)
+    {
+        Console.WriteLine(oneDay.Date);
+        Console.WriteLine(date.Date);
+        if (oneDay.Date != date.Date)
+        {
+            oneDay = date;
+            return false;
+        }
+        return true;
+
+    }
+
+}
+<div  style="min-height:100vh;">
+
+
+    <a  asp-controller="Admin" asp-action="AddScheldue" class="go-button2">AddScheldue</a>
+
+    <a asp-controller="User" asp-action="LogOut">LogOut</a>
+
+    <div  class="combo-box1" style="margin-top:40px;">
+        <h2>Your Groups</h2>
+        @foreach (Schedule day in ViewBag.Sch)
+        {
+
+
+
+
+
+
+
+
+            @if (SameDay(day.DateOfTrain) == false)
+            {
+
+                <div class="combo-header2">
+                    <div class="header-container2">
+
+                        <h2>@day.DateOfTrain.ToString("ddd d MMM",CultureInfo.CreateSpecificCulture("en-US"))</h2>
+                        <img src="/images/up.png" alt="">
+                    </div>
+
+                </div>
+
+            }
+
+            <div class="combo-item2">
+
+                <h3>@day.Name</h3>
+                <p>@day.DateOfTrain.ToString("hh:mm tt",CultureInfo.CreateSpecificCulture("en-US")) /@day.TimeOfTrain min</p>
+                <p>@day.CountPeople</p>
+                </div>
+
+
+
+
+
+
+
+
+
+        }
+    </div>
+
 
 </div>
