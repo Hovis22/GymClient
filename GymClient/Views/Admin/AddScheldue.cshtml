@@ -10,7 +10,7 @@
 	<meta name="author" content="Muhamad Nauval Azhar">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<meta name="description" content="This is a login page template based on Bootstrap 5">
-	<title>Bootstrap 5 Login Page</title>
+	<title>Add Class</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 
@@ -22,7 +22,7 @@
 
 					<div class="card shadow-lg">
 						<div class="card-body p-5">
-							<h1 class="fs-4 card-title fw-bold mb-4">Login</h1>
+							<h1 class="fs-4 card-title fw-bold mb-4">Add Class</h1>
 							<p style="color:darkred">@ViewBag.Error</p>
 							<form asp-action="AddNewScheldue" asp-controller="Admin" enctype="multipart/form-data">
 
@@ -34,28 +34,54 @@
 
 								<div class="mb-3">
 									<div class="mb-2 w-100">
-										<label class="text-muted" for="CoachId">Coach</label>
+									
 
 									</div>
+									@if(ViewBag.RoleId == "2"){
+										<label class="text-muted" for="CoachId">Coach</label>
 									<select asp-for="CoachId">
+
 									    @foreach(var coach in ViewBag.Coaches){
 											<option value="@coach.Id">@coach.Name</option>
 										}
 									</select>
-								
+									}
+									@if(ViewBag.RoleId == "1"){
+										<input type="text" asp-for="CoachId" value="@ViewBag.UserId" hidden>
+
+									}
+
+
 
 								</div>
 
 
-								<div class="mb-3">
+								<div id="maxpep" class="mb-3">
 									<div class="mb-2 w-100">
 										<label class="text-muted" for="MaxPeople">MaxPeople</label>
 
 									</div>
-									<input id="Name" asp-for="MaxPeople" type="text" class="form-control">
+									<input id="maxpep" asp-for="MaxPeople" type="text" class="form-control">
 									<span asp-validation-for="MaxPeople" class="text-danger"></span>
 
 								</div>
+
+
+								<div style="display:none" id="UsersId" class="mb-3">
+									<div class="mb-2 w-100">
+										<label class="text-muted" for="CoachId">Users</label>
+
+									</div>
+									<select asp-for="userId">
+										@foreach (var user in ViewBag.Users)
+										{
+											<option value="@user.Id">@user.Name</option>
+										}
+									</select>
+
+
+								</div>
+
 
 
 								<div class="mb-3">
@@ -63,10 +89,14 @@
 										<label class="text-muted" for="TypeId">TypeId</label>
 
 									</div>
-								    <select asp-for="TypeId">
+									<input type="text" asp-for="TypeId" id="hiddenGen" value="2" hidden >
+									<input type="radio" value="1"/><label>Solo</label>
+									<input type="radio" value="2" checked /><label>Group</label>
+
+							@*	    <select asp-for="TypeId">
 										<option value="1">Solo</option>
 										<option value="2">Group</option>
-									</select>
+									</select>*@
 								
 
 								</div>
@@ -76,7 +106,7 @@
 										<label class="text-muted" for="DateOfTrain">DateOfTrain</label>
 
 									</div>
-									<input id="BirthDay" asp-for="DateOfTrain" type="date" class="form-control">
+									<input id="BirthDay" asp-for="DateOfTrain" type="datetime-local" class="form-control">
 									<span asp-validation-for="DateOfTrain" class="text-danger"></span>
 
 								</div>
@@ -92,7 +122,7 @@
 								</div>
 
 								<button type="submit" class="btn btn-primary ms-auto">
-									Login
+									Add
 								</button>
 
 
@@ -110,3 +140,44 @@
 
 </body>
 </html>
+
+<script>
+	
+	let hiddenGender = document.getElementById("hiddenGen");
+	let maxpeople = document.getElementById("maxpep");
+	
+	let radio = document.querySelectorAll("input[type=radio]");
+	let userin = document.getElementById("UsersId");
+
+
+
+
+	radio.forEach(element => {
+		element.addEventListener('click', (event) => {
+			clearRadio();
+			element.checked = true;
+
+			if (element.value == "1"){
+				maxpeople.style.display = "none";
+				userin.style.display = "block";
+			}
+			else {maxpeople.style.display = "block";
+				userin.style.display = "none";
+
+			}
+
+			hiddenGender.value = element.value;
+		})
+	})
+
+
+
+	function clearRadio() {
+		radio.forEach(element => {
+			element.checked = false;
+		});
+	}
+
+
+
+</script>

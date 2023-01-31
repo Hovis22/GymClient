@@ -30,7 +30,7 @@ namespace GymClient.Controllers
 
         public IActionResult Index(string? error="")
         {
-           // ViewBag.IsEmail = isEmail;
+            ViewBag.Error = error;
 
             return View();
         }
@@ -43,7 +43,7 @@ namespace GymClient.Controllers
          
            if(await SendRegisterModel(reg) == false)
             {
-                return RedirectToAction("Index", "Register", new { error = "Email or Password Incorrect" });
+                return RedirectToAction("Index", "Register", new { error = "Email Exist" });
 			}
            
             return Redirect("/");
@@ -71,7 +71,7 @@ namespace GymClient.Controllers
                 if (httpResponseMessage.IsSuccessStatusCode)
                 {
                     string jsonString = await httpResponseMessage.Content.ReadAsStringAsync();
-                    var user = JsonConvert.DeserializeObject<Client>(jsonString);
+                    var user = JsonConvert.DeserializeObject<Personal>(jsonString);
 
 
                   await Authenticate(user);
@@ -91,16 +91,16 @@ namespace GymClient.Controllers
 
 
 
-        private async Task Authenticate(Client model)
+        private async Task Authenticate(Personal model)
         {
-
+            model.RoleId = 0;
 
             var claims = new List<Claim>
     {
-        new Claim(ClaimTypes.Name, model.Email),
-        new Claim(ClaimTypes.Locality, model.Name),
-        new Claim(ClaimTypes.NameIdentifier, model.Id.ToString())
-    };
+        new Claim(ClaimTypes.Name, model.Name),
+        new Claim(ClaimTypes.NameIdentifier, model.Id.ToString()),
+		  new Claim(ClaimsIdentity.DefaultRoleClaimType, model.RoleId.ToString())
+	};
             var claimsIdentity = new ClaimsIdentity(claims, "Cookies");
             var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 

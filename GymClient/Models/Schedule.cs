@@ -17,11 +17,15 @@ namespace GymClient.Models
 		[Required]
 		public int TypeId { get; set; }
 
-		[Required]
-		public int MaxPeople { get; set; }
+		
+		public int MaxPeople { get; set; } = 0;
 
 		public int CountPeople { get; set; } = 0;
 
 		public Personal? personal { get; set; }
+
+		public int? userId { get; set; }
+
+
 	}
 }

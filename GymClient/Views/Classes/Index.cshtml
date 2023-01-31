@@ -35,27 +35,28 @@
 <div class="classes-block">
 
     <h1>Classes</h1>
-
-    @foreach(Schedule day in ViewBag.Schedule){
-
-
-        
-
+    <label style="color:darkred">@ViewBag.Error</label>
         <div class="combo-box">
+        @foreach (Schedule day in ViewBag.Schedule) {
 
 
-    
+
+
+
+
+
+
             @if (SameDay(day.DateOfTrain) == false)
             {
 
                 <div class="combo-header">
                     <div class="header-container">
-                
-                    <h2>@day.DateOfTrain.ToString("ddd d MMM",CultureInfo.CreateSpecificCulture("en-US"))</h2>
-                    <img src="/images/up.png" alt="">
-                </div>
 
-            </div>
+                        <h2>@day.DateOfTrain.ToString("ddd d MMM",CultureInfo.CreateSpecificCulture("en-US"))</h2>
+                        <img src="/images/up.png" alt="">
+                    </div>
+
+                </div>
 
             }
 
@@ -65,22 +66,22 @@
                 <p>@day.DateOfTrain.ToString("hh:mm tt",CultureInfo.CreateSpecificCulture("en-US")) /@day.TimeOfTrain min</p>
                 <p>@day.personal.Name</p>
 
-               
-                    <a class="go-button" href="">Go</a>
+
+                <a asp-action="UserToTrain" asp-controller="Classes" asp-route-id=@day.Id class="go-button" >Go</a>
                
 
             </div>
 
        
 
-        </div>
+      
 
 
 
 
 
     }
-
+    </div>
 @*    <div class="combo-box">
         <div class="combo-header">
             <div class="header-container">
@@ -129,3 +130,10 @@
 
 
 </div>
+
+
+<script>
+
+   
+
+</script>

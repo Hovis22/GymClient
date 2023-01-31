@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using static System.Net.Mime.MediaTypeNames;
 using System.Text;
 using System.Numerics;
+using System.Security.Claims;
 
 namespace GymClient.Controllers
 {
@@ -30,17 +31,25 @@ namespace GymClient.Controllers
             return View();
         }
 
-        [Authorize(Policy = "OnlyForAdmins")]
+		public IActionResult Coach()
+		{
+			return View();
+		}
+
+
+		[Authorize(Policy = "OnlyForAdmins")]
         public IActionResult AddCoach()
         {
             return View();
         }
 
 
-		[Authorize(Policy = "OnlyForAdmins")]
 		public async Task<IActionResult> AddScheldue()
 		{
 			ViewBag.Coaches = await OnGetCoachesAsync();
+			ViewBag.Users = await OnGetUsersAsync();
+			ViewBag.RoleId = User.FindFirst(x => x.Type == ClaimsIdentity.DefaultRoleClaimType).Value;
+			ViewBag.UserId = Convert.ToInt32(User.FindFirst(x => x.Type == ClaimTypes.NameIdentifier).Value);
 			return View();
 		}
 
@@ -95,7 +104,7 @@ namespace GymClient.Controllers
 		{
 			string url = "admin/addschedule";
 
-
+			Console.WriteLine(1234);
 			var client = clientFactory.CreateClient(
 			name: "Gym");
 
@@ -133,7 +142,7 @@ namespace GymClient.Controllers
 		{
 			string url = "admin/addpersonal";
 
-
+			
 			var client = clientFactory.CreateClient(
 			name: "Gym");
 
@@ -175,6 +184,25 @@ namespace GymClient.Controllers
 			{
 				string jsonString = await response.Content.ReadAsStringAsync();
 				 return JsonConvert.DeserializeObject<IEnumerable<Personal>>(jsonString).ToList<Personal>();
+			}
+			return null;
+		}
+
+
+		public async Task<List<Client>?> OnGetUsersAsync()
+		{
+
+			string uri = "admin/getusers";
+
+			var client = clientFactory.CreateClient(
+			name: "Gym");
+			var request = new HttpRequestMessage(
+			method: HttpMethod.Get, requestUri: uri);
+			HttpResponseMessage response = await client.SendAsync(request);
+			if (response.IsSuccessStatusCode)
+			{
+				string jsonString = await response.Content.ReadAsStringAsync();
+				return JsonConvert.DeserializeObject<IEnumerable<Client>>(jsonString).ToList<Client>();
 			}
 			return null;
 		}

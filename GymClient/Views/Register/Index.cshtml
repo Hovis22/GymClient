@@ -16,15 +16,15 @@
 
     <div class="register-block">
         <h2>Your Information</h2>
+        <label style="color:darkred; font-size:10px;">@ViewBag.Error</label>
 
         @using (Html.BeginForm("GoNew", "Register", FormMethod.Post))
         {
          
-            <label style="padding-bottom:5px;" for="Name">Name</label>
+            <span style="padding-bottom:5px;" for="Name">Name</span>
             <div class="row-block">
-
+              
                 <div class="input-block">
-                   
                     <input asp-for="Name" type="text">
                     <span asp-validation-for="Name" class="text-danger"></span>
                     <label asp-validation-for="Name" class="under-name" for="First">First</label>

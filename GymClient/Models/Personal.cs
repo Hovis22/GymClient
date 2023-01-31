@@ -19,7 +19,7 @@ namespace GymClient.Models
 
         public string Gender { get; set; }
 
-        public int RoleId { get; set; }
+        public int? RoleId { get; set; } = 0;
 
         public string IMGPath { get; set; }
 

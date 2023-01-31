@@ -14,12 +14,14 @@
     <link rel="stylesheet" href="~/css/couhes_style.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/classes_styel.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/register_style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/user_style.css" asp-append-version="true" />
+
 </head>
 <body>
     <div class="wrapper">
     <header>
         <div class="logo-container">
-            <h2>IronWorks Gym</h2>
+                <a href="/"><h2>IronWorks Gym</h2></a>
         </div>
 
         <div class="links-container">
@@ -27,9 +29,7 @@
                 <li><a asp-action="Index" asp-controller="Coach" >OUR TRAINERS</a></li>
                     <li><a asp-action="Index" asp-controller="Classes">CLASSES</a></li>
 
-                <li>INFO</li>
-      
-                    <li><a asp-action="Index" asp-controller="User">Login</a></li>
+                    <li><a asp-action="Index" asp-controller="User">Сabinet</a></li>
 
             </ul>
         </div>

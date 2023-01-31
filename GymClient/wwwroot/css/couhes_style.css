@@ -71,13 +71,39 @@
     grid-template-columns: repeat(auto-fit,minmax(31.8vw,1fr));
 }
 
-.coach{
+.coach {
     margin: 10px;
     width: 31.8vw;
-    height:500px;
+    height: 400px;
+    position: relative;
+    transition-delay: 0.5;
 }
 
 .coach img{
     height:inherit;
     width: inherit;
 }
+
+
+.modal-show {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(255,255,255, 0.7);
+    padding: 20px;
+    display: none;
+    height:100%;
+    transition-duration:2s;
+   transition-delay:2s;
+}
+
+
+
+.coach:hover .modal-show{
+    display:block;
+}
+
+
+
+

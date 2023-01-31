@@ -88,12 +88,14 @@ namespace GymClient.Controllers
 
         private async Task Authenticate(Personal model)
         {
-          
+           if(model.RoleId == null)
+            {
+                model.RoleId = 0;
+            }
 
             var claims = new List<Claim>
     {
-        new Claim(ClaimTypes.Name, model.Email),
-        new Claim(ClaimTypes.Locality, model.Name),
+        new Claim(ClaimTypes.Name, model.Name),
         new Claim(ClaimTypes.NameIdentifier, model.Id.ToString()),
            new Claim(ClaimsIdentity.DefaultRoleClaimType, model.RoleId.ToString())
     };

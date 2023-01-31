@@ -1,0 +1,53 @@
+﻿.main-block{
+    display:flex;
+    justify-content:space-around;
+
+}
+
+.combo-box2 {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+.combo-header2 {
+    display: flex;
+    flex-direction: row;
+    background-color: #000;
+    height: 80px;
+    color: white;
+}
+
+.header-container2 {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    padding: 25px 30px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+
+
+
+    .header-container2 img {
+        width: 24.5px;
+        height: 10.5px;
+        margin-top: 10px;
+    }
+
+.combo-item2 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 50px;
+    font-size: 30px;
+    border-bottom: 1px solid #9D9292;
+    justify-content: space-between;
+}
+
+    .combo-item2 h3 {
+        width: 200px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }

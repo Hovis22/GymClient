@@ -22,6 +22,12 @@ header{
  
 }
 
+a{
+    text-decoration:none;
+    color:dimgray;
+}
+
+
 .logo-container{
 
     padding: 25.5px ;
